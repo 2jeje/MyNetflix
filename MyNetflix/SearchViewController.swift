@@ -1,6 +1,7 @@
 
 
 import UIKit
+import Kingfisher
 
 class SearchViewController: UIViewController {
 
@@ -19,8 +20,11 @@ extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ResultCell", for: indexPath) as? ResultCell else { return UICollectionViewCell() }
-       // print("\(movies[indexPath.item].previewURL)")
-       // cell.movieThumbnail.image = UIImage(contentsOfFile: movies[indexPath.item].previewURL)
+
+        let movie = movies[indexPath.item]
+        let url = URL(string: movie.thumbnailPath!)
+        cell.movieThumbnail.kf.setImage(with: url)
+
         return cell
     }
     
