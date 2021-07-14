@@ -46,6 +46,16 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
         let height = width * 10/7
         return CGSize(width: width, height: height)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movies[indexPath.item]
+        
+        let sb = UIStoryboard(name: "Player", bundle: nil)
+        let vc = sb.instantiateViewController(identifier: "PlayerViewController") as! PlayerViewController
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+        
+    }
 }
 
 class ResultCell: UICollectionViewCell {
@@ -106,7 +116,6 @@ class SearchAPI {
                 completion([])
                 return
             }
-            print("\(String(data: resultData, encoding: .utf8))")
             let movies = SearchAPI.parseMovies(resultData)
             completion(movies)
             
